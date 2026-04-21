@@ -1,5 +1,10 @@
 <?php
 
+namespace Veikals\App;
+
+use PDO;
+use PDOException;
+
 class DB
 {
     private static $pdo = null;
