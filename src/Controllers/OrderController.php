@@ -15,7 +15,8 @@ class OrderController
 
     public function index()
     {
-        $orders = $this->orderModel->getAll();
+        $search = $_GET['search'] ?? null;
+        $orders = $this->orderModel->getAll($search);
         require __DIR__ . '/../../views/orders.php';
     }
 }

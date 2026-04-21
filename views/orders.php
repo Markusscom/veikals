@@ -1,7 +1,13 @@
+<?php include 'layout/header.php'; ?>
 <h1>Pasūtījumi</h1>
-<a href='/'>Atpakaļ</a><br>
+<a href='/'>Atpakaļ</a>
 
-<table border='1' cellpadding='5' cellspacing='0'>
+<form method="GET" action="/orders" style="margin: 20px 0;">
+    <input type="text" name="search" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>" placeholder="Meklēt (Statuss/Komentārs)..." style="padding: 8px; width: 250px;">
+    <button type="submit" style="padding: 8px;">Meklēt</button>
+</form>
+
+<table>
     <tr>
         <th>ID</th>
         <th>Klienta ID</th>
@@ -21,3 +27,4 @@
         </tr>
     <?php endforeach; ?>
 </table>
+<?php include 'layout/footer.php'; ?>

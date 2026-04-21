@@ -15,7 +15,8 @@ class CustomerController
 
     public function index()
     {
-        $customers = $this->customerModel->getAll();
+        $search = $_GET['search'] ?? null;
+        $customers = $this->customerModel->getAll($search);
         require __DIR__ . '/../../views/customers.php';
     }
 }

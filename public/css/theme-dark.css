@@ -1,0 +1,10 @@
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --table-header-bg: #333;
+    --table-border: #444;
+}
+
+tr:hover {
+    background-color: #2a2a2a !important;
+}
