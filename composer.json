@@ -1,0 +1,19 @@
+{
+    "name": "veikals/app",
+    "description": "Veikals2 refactoring",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Veikals\\App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mkalendra",
+            "email": "mkalendra@example.com"
+        }
+    ]
+}
