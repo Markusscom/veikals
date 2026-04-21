@@ -52,12 +52,7 @@ $stats = $statsModel->getDashboardStats();
     <div class="grid">
         <div class="card">
             <h3>Pasūtījumu aktivitāte (pēdējās 7 dienas)</h3>
-            <svg class="chart-svg" viewBox="0 0 400 200">
-                <line x1="0" y1="180" x2="400" y2="180" stroke="#ccc" />
-                <path class="line-path" d="M0 150 L100 100 L200 120 L300 50 L400 80" />
-                <text x="0" y="195" font-size="10">Pirms 7d</text>
-                <text x="350" y="195" font-size="10">Šodien</text>
-            </svg>
+            <canvas id="ordersChart" height="200"></canvas>
         </div>
         <div class="card">
             <h3>Top klienti</h3>
@@ -72,6 +67,26 @@ $stats = $statsModel->getDashboardStats();
             </div>
         </div>
     </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('ordersChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: <?= json_encode(array_keys($stats['weekly_orders'])) ?>,
+            datasets: [{
+                label: 'Pasūtījumi',
+                data: <?= json_encode(array_values($stats['weekly_orders'])) ?>,
+                borderColor: '#4a90e2',
+                tension: 0.3,
+                fill: true,
+                backgroundColor: 'rgba(74, 144, 226, 0.1)'
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+</script>
 
     <div class="card" style="margin-top: 20px;">
         <h3>Pasūtījumu statusi</h3>
