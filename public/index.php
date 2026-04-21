@@ -30,54 +30,49 @@ $stats = $statsModel->getDashboardStats();
 <html lang="lv">
 <head>
     <meta charset="UTF-8">
-    <title>Informācijas panelis - Veikals</title>
+    <title>Komandcentrs - Veikals</title>
     <link rel="stylesheet" href="/css/base.css">
     <style>
-        .dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .card h3 { margin-top: 0; font-size: 14px; color: #666; }
-        .card .value { font-size: 28px; font-weight: bold; color: var(--primary-color); }
-        .quick-actions { display: flex; gap: 15px; margin-bottom: 30px; }
-        .btn-action { padding: 12px 20px; background: #2d3436; color: white; border-radius: 8px; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-        .recent-orders { background: white; padding: 20px; border-radius: 12px; }
+        :root { --anim-duration: 1.5s; }
+        .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .card { background: #fff; padding: 25px; border-radius: 16px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .chart-svg { width: 100%; height: 200px; }
+        .line-path { fill: none; stroke: var(--primary-color); stroke-width: 3; stroke-dasharray: 500; stroke-dashoffset: 500; animation: draw var(--anim-duration) forwards; }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+        .top-client { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .badge { background: var(--secondary-color); padding: 4px 8px; border-radius: 6px; font-weight: bold; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Informācijas panelis</h1>
+    <h1>Komandcentrs</h1>
     
-    <div class="quick-actions">
-        <a href="/customers" class="btn-action">👥 Klientu saraksts</a>
-        <a href="/orders" class="btn-action">📦 Pasūtījumu saraksts</a>
-    </div>
-
-    <div class="dashboard">
+    <div class="grid">
         <div class="card">
-            <h3>Klienti kopā</h3>
-            <div class="value"><?= $stats['total_customers'] ?></div>
+            <h3>Pasūtījumu aktivitāte (pēdējās 7 dienas)</h3>
+            <svg class="chart-svg" viewBox="0 0 400 200">
+                <path class="line-path" d="M0 150 L100 100 L200 120 L300 50 L400 80" />
+            </svg>
         </div>
         <div class="card">
-            <h3>Visi pasūtījumi</h3>
-            <div class="value"><?= $stats['total_orders'] ?></div>
-        </div>
-        <div class="card" style="border-left: 4px solid var(--accent-color);">
-            <h3>Gaida izpildi (pending)</h3>
-            <div class="value" style="color: var(--accent-color);"><?= $stats['pending_orders'] ?></div>
-        </div>
-    </div>
-
-    <div class="recent-orders">
-        <h3>Jaunākie pasūtījumi</h3>
-        <table>
-            <tr><th>Klients</th><th>Datums</th><th>Statuss</th></tr>
-            <?php foreach ($stats['recent_orders'] as $order): ?>
-            <tr>
-                <td><?= $order['first_name'] . ' ' . $order['last_name'] ?></td>
-                <td><?= $order['order_date'] ?></td>
-                <td><?= $order['status'] ?></td>
-            </tr>
+            <h3>Top klienti</h3>
+            <?php foreach ($stats['top_customers'] as $c): ?>
+                <div class="top-client">
+                    <span><?= $c['first_name'] ?> <?= $c['last_name'] ?></span>
+                    <span class="badge"><?= $c['points'] ?> p.</span>
+                </div>
             <?php endforeach; ?>
-        </table>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+        <h3>Pasūtījumu statusi</h3>
+        <div style="display:flex; gap: 20px;">
+            <?php foreach ($stats['status_dist'] as $status => $count): ?>
+                <div><strong><?= ucfirst($status) ?></strong>: <?= $count ?></div>
+            <?php endforeach; ?>
+        </div>
     </div>
 </div>
 </body>
