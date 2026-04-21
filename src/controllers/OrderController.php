@@ -1,8 +1,8 @@
 <?php
 
-namespace Veikals\Controllers;
+namespace Veikals\App\Controllers;
 
-use Veikals\Models\Order;
+use Veikals\App\Models\Order;
 
 class OrderController
 {

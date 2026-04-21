@@ -1,6 +1,6 @@
 <?php
 
-namespace Veikals\Core;
+namespace Veikals\App\Core;
 
 use DB;
 

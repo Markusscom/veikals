@@ -1,8 +1,8 @@
 <?php
 
-namespace Veikals\Controllers;
+namespace Veikals\App\Controllers;
 
-use Veikals\Models\Customer;
+use Veikals\App\Models\Customer;
 
 class CustomerController
 {

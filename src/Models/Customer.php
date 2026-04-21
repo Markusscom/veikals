@@ -1,8 +1,8 @@
 <?php
 
-namespace Veikals\Models;
+namespace Veikals\App\Models;
 
-use Veikals\Core\Model;
+use Veikals\App\Core\Model;
 
 class Customer extends Model
 {

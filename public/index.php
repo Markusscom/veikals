@@ -5,8 +5,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
 
-use Veikals\Controllers\CustomerController;
-use Veikals\Controllers\OrderController;
+use Veikals\App\Controllers\CustomerController;
+use Veikals\App\Controllers\OrderController;
 
 $customerController = new CustomerController();
 $orderController = new OrderController();
