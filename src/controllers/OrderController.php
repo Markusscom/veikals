@@ -12,15 +12,16 @@ class OrderController {
 
         echo "<h1>Pasūtījumi</h1>";
         echo "<a href='/'>Atpakaļ</a><br>";
+
         echo "<table border='1' cellpadding='5' cellspacing='0'>";
-        echo "<tr>";
-        echo "<th>ID</th>";
-        echo "<th>Klienta ID</th>";
-        echo "<th>Pasūtījuma datums</th>";
-        echo "<th>Statuss</th>";
-        echo "<th>Komentārs</th>";
-        echo "<th>Piegādes datums</th>";
-        echo "</tr>";
+        echo "<tr>
+                <th>ID</th>
+                <th>Klienta ID</th>
+                <th>Pasūtījuma datums</th>
+                <th>Statuss</th>
+                <th>Komentārs</th>
+                <th>Piegādes datums</th>
+            </tr>";
 
         foreach ($orders as $order) {
             echo "<tr>";
