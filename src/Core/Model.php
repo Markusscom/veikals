@@ -2,7 +2,7 @@
 
 namespace Veikals\App\Core;
 
-use Veikals\App\DB;
+use Veikals\App\DB\DB;
 
 abstract class Model
 {
