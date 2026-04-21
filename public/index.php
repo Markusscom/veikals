@@ -52,7 +52,10 @@ $stats = $statsModel->getDashboardStats();
         <div class="card">
             <h3>Pasūtījumu aktivitāte (pēdējās 7 dienas)</h3>
             <svg class="chart-svg" viewBox="0 0 400 200">
+                <line x1="0" y1="180" x2="400" y2="180" stroke="#ccc" />
                 <path class="line-path" d="M0 150 L100 100 L200 120 L300 50 L400 80" />
+                <text x="0" y="195" font-size="10">Pirms 7d</text>
+                <text x="350" y="195" font-size="10">Šodien</text>
             </svg>
         </div>
         <div class="card">
@@ -63,15 +66,24 @@ $stats = $statsModel->getDashboardStats();
                     <span class="badge"><?= $c['points'] ?> p.</span>
                 </div>
             <?php endforeach; ?>
+            <div style="margin-top: 20px;">
+                <a href="/customers" class="btn-action" style="width: 100%; justify-content: center;">👥 Pārvaldīt klientus</a>
+            </div>
         </div>
     </div>
 
     <div class="card" style="margin-top: 20px;">
         <h3>Pasūtījumu statusi</h3>
-        <div style="display:flex; gap: 20px;">
+        <div style="display:flex; gap: 20px; align-items: center;">
             <?php foreach ($stats['status_dist'] as $status => $count): ?>
-                <div><strong><?= ucfirst($status) ?></strong>: <?= $count ?></div>
+                <div style="display:flex; align-items:center; gap: 8px;">
+                    <div style="width: 12px; height: 12px; background: var(--primary-color);"></div>
+                    <strong><?= ucfirst($status) ?></strong>: <?= $count ?>
+                </div>
             <?php endforeach; ?>
+            <div style="margin-left: auto;">
+                <a href="/orders" class="btn-action">📦 Pārvaldīt pasūtījumus</a>
+            </div>
         </div>
     </div>
 </div>
