@@ -7,11 +7,11 @@ class DB
     public static function connect()
     {
         if (self::$pdo === null) {
-            $host = '172.17.192.1';
-            $db = 'store_dev';
-            $user = 'store_app';
-            $pass = 'password';
-            $charset = 'utf8mb4';
+            $host = $_ENV['DB_HOST'];
+            $db = $_ENV['DB_NAME'];
+            $user = $_ENV['DB_USER'];
+            $pass = $_ENV['DB_PASS'];
+            $charset = $_ENV['DB_CHARSET'];
 
             $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
@@ -31,9 +31,11 @@ class DB
         return self::$pdo;
     }
 
-    public static function query($sqlQuery)
+    public static function query($sqlQuery, $params = [])
     {
         $pdo = self::connect();
-        return $pdo->query($sqlQuery);
+        $stmt = $pdo->prepare($sqlQuery);
+        $stmt->execute($params);
+        return $stmt;
     }
 }

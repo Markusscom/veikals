@@ -1,8 +1,12 @@
 <?php
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
+
 require_once __DIR__ . '/../db/DB.php';
-require_once __DIR__ . '/../src/controllers/CustomerController.php';
-require_once __DIR__ . '/../src/controllers/OrderController.php';
+// Controllers will be loaded via autoloader later
 
 $pdo = DB::connect();
 
