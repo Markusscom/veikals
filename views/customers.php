@@ -27,4 +27,13 @@
         </tr>
     <?php endforeach; ?>
 </table>
+
+<div style="margin-top: 20px;">
+    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+        <a href="?page=<?= $i ?>&search=<?= urlencode($_GET['search'] ?? '') ?>" 
+           style="padding: 5px 10px; border: 1px solid #ccc; <?= $i == $page ? 'background: #eee;' : '' ?>">
+            <?= $i ?>
+        </a>
+    <?php endfor; ?>
+</div>
 <?php include 'layout/footer.php'; ?>
