@@ -46,6 +46,7 @@ $stats = $statsModel->getDashboardStats();
 </head>
 <body>
 <div class="container">
+    <?php include __DIR__ . '/../views/layout/nav.php'; ?>
     <h1>Komandcentrs</h1>
     
     <div class="grid">
