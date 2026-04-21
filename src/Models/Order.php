@@ -6,13 +6,33 @@ use Veikals\App\Core\Model;
 
 class Order extends Model
 {
-    public function getAll($search = null)
+    public function getPaginated($limit, $offset, $search = null)
     {
+        $sql = "SELECT * FROM orders";
+        $params = [];
         if ($search) {
-            $stmt = $this->db->prepare("SELECT * FROM orders WHERE status LIKE ? OR comment LIKE ?");
-            $stmt->execute(["%$search%", "%$search%"]);
-            return $stmt->fetchAll();
+            $sql .= " WHERE status LIKE ? OR comment LIKE ?";
+            $params = ["%$search%", "%$search%"];
         }
-        return $this->db->query("SELECT * FROM orders")->fetchAll();
+        $sql .= " LIMIT ? OFFSET ?";
+        $params[] = (int)$limit;
+        $params[] = (int)$offset;
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
+    public function count($search = null)
+    {
+        $sql = "SELECT COUNT(*) FROM orders";
+        $params = [];
+        if ($search) {
+            $sql .= " WHERE status LIKE ? OR comment LIKE ?";
+            $params = ["%$search%", "%$search%"];
+        }
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+        return (int)$stmt->fetchColumn();
     }
 }

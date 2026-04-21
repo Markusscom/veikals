@@ -15,8 +15,15 @@ class OrderController
 
     public function index()
     {
+        $limit = 10;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $limit;
         $search = $_GET['search'] ?? null;
-        $orders = $this->orderModel->getAll($search);
+
+        $orders = $this->orderModel->getPaginated($limit, $offset, $search);
+        $totalOrders = $this->orderModel->count($search);
+        $totalPages = ceil($totalOrders / $limit);
+
         require __DIR__ . '/../../views/orders.php';
     }
 }
