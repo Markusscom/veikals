@@ -1,10 +1,24 @@
 <?php include 'layout/header.php'; ?>
-<h1>Klienti</h1>
-<a href='/'>Atpakaļ</a>
+<h1>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 10px;">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+    </svg>
+    Klienti
+</h1>
 
-<form method="GET" action="/customers" style="margin: 20px 0;">
-    <input type="text" name="search" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>" placeholder="Meklēt..." style="padding: 8px;">
-    <button type="submit" style="padding: 8px;">Meklēt</button>
+<a href='/'>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle;">
+        <path d="M19 12H5M12 19l-7-7 7-7"></path>
+    </svg>
+    Atpakaļ
+</a>
+
+<form method="GET" action="/customers">
+    <input type="text" name="search" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>" placeholder="Meklēt pēc vārda vai e-pasta...">
+    <button type="submit">Meklēt</button>
 </form>
 
 <table>
@@ -28,10 +42,10 @@
     <?php endforeach; ?>
 </table>
 
-<div style="margin-top: 20px;">
+<div class="pagination">
     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
         <a href="?page=<?= $i ?>&search=<?= urlencode($_GET['search'] ?? '') ?>" 
-           style="padding: 5px 10px; border: 1px solid #ccc; <?= $i == $page ? 'background: #eee;' : '' ?>">
+           class="<?= $i == $page ? 'active' : '' ?>">
             <?= $i ?>
         </a>
     <?php endfor; ?>
