@@ -15,12 +15,25 @@ $statsModel = new Stats();
 
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-if ($requestUri === '/customers' || $requestUri === '/orders') {
-    if ($requestUri === '/customers') {
-        $customerController->index();
+if (strpos($requestUri, '/customers') === 0) {
+    if ($requestUri === '/customers/edit') {
+        $customerController->edit();
+    } elseif ($requestUri === '/customers/update') {
+        $customerController->update();
+    } elseif ($requestUri === '/customers/delete') {
+        $customerController->delete();
+    } elseif ($requestUri === '/customers/create') {
+        $customerController->create();
+    } elseif ($requestUri === '/customers/store') {
+        $customerController->store();
     } else {
-        $orderController->index();
+        $customerController->index();
     }
+    exit;
+}
+
+if (strpos($requestUri, '/orders') === 0) {
+    $orderController->index();
     exit;
 }
 
@@ -84,7 +97,10 @@ $stats = $statsModel->getDashboardStats();
                 backgroundColor: 'rgba(74, 144, 226, 0.1)'
             }]
         },
-        options: { responsive: true, maintainAspectRatio: false }
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false 
+        }
     });
 </script>
 
