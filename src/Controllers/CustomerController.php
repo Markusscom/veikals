@@ -24,7 +24,7 @@ class CustomerController
         $totalCustomers = $this->customerModel->count($search);
         $totalPages = ceil($totalCustomers / $limit);
 
-        require __DIR__ . '/../../views/customers.php';
+        require dirname(__DIR__, 2) . '/views/customers.php';
     }
 
     public function edit()
@@ -34,7 +34,7 @@ class CustomerController
         if (!$customer) {
             die("Klients nav atrasts.");
         }
-        require __DIR__ . '/../../views/customers/edit.php';
+        require dirname(__DIR__, 2) . '/views/customers/edit.php';
     }
 
     public function update()
@@ -50,7 +50,7 @@ class CustomerController
 
     public function create()
     {
-        require __DIR__ . '/../../views/customers/create.php';
+        require dirname(__DIR__, 2) . '/views/customers/create.php';
     }
 
     public function store()
