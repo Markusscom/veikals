@@ -33,7 +33,19 @@ if (strpos($requestUri, '/customers') === 0) {
 }
 
 if (strpos($requestUri, '/orders') === 0) {
-    $orderController->index();
+    if ($requestUri === '/orders/edit') {
+        $orderController->edit();
+    } elseif ($requestUri === '/orders/update') {
+        $orderController->update();
+    } elseif ($requestUri === '/orders/delete') {
+        $orderController->delete();
+    } elseif ($requestUri === '/orders/create') {
+        $orderController->create();
+    } elseif ($requestUri === '/orders/store') {
+        $orderController->store();
+    } else {
+        $orderController->index();
+    }
     exit;
 }
 
