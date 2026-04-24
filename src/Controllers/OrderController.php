@@ -34,7 +34,7 @@ class OrderController
         if (!$order) {
             die("Pasūtījums nav atrasts.");
         }
-        require __DIR__ . '/../../views/orders/edit.php';
+        require dirname(__DIR__, 2) . '/views/orders/edit.php';
     }
 
     public function update()
@@ -50,7 +50,7 @@ class OrderController
 
     public function create()
     {
-        require __DIR__ . '/../../views/orders/create.php';
+        require dirname(__DIR__, 2) . '/views/orders/create.php';
     }
 
     public function store()
