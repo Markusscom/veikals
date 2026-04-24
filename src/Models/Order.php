@@ -6,6 +6,18 @@ use Veikals\App\Core\Model;
 
 class Order extends Model
 {
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    public function getById($id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM orders WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
+
     public function getPaginated($limit, $offset, $search = null)
     {
         $sql = "SELECT * FROM orders";
