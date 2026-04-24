@@ -6,14 +6,8 @@
         <path d="M16 10a4 4 0 0 1-8 0"></path>
     </svg>
     Pasūtījumi
+    <a href="/orders/create" class="btn-action" style="float: right; background: var(--secondary-color);">➕ Pievienot pasūtījumu</a>
 </h1>
-
-<a href='/' class="back-link">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle;">
-        <path d="M19 12H5M12 19l-7-7 7-7"></path>
-    </svg>
-    Atpakaļ
-</a>
 
 <form method="GET" action="/orders">
     <input type="text" name="search" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>" placeholder="Meklēt pēc statusa vai komentāra...">
@@ -28,6 +22,7 @@
         <th>Statuss</th>
         <th>Komentārs</th>
         <th>Piegādes datums</th>
+        <th>Darbības</th>
     </tr>
     <?php foreach ($orders as $order): ?>
         <tr>
@@ -37,6 +32,10 @@
             <td><?= htmlspecialchars($order['status']) ?></td>
             <td><?= htmlspecialchars($order['comment']) ?></td>
             <td><?= htmlspecialchars($order['delivery_date']) ?></td>
+            <td>
+                <a href="/orders/edit?id=<?= htmlspecialchars($order['id']) ?>" class="btn-action" style="padding: 5px 10px; font-size: 12px; background: var(--primary-color);">Rediģēt</a>
+                <a href="/orders/delete?id=<?= htmlspecialchars($order['id']) ?>" class="btn-action" style="padding: 5px 10px; font-size: 12px; background: var(--accent-color);" onclick="return confirm('Vai tiešām dzēst?')">Dzēst</a>
+            </td>
         </tr>
     <?php endforeach; ?>
 </table>

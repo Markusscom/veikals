@@ -65,7 +65,9 @@ $stats = $statsModel->getDashboardStats();
     <div class="grid">
         <div class="card">
             <h3>Pasūtījumu aktivitāte (pēdējās 7 dienas)</h3>
-            <canvas id="ordersChart" height="200"></canvas>
+            <div style="height: 300px; position: relative;">
+                <canvas id="ordersChart"></canvas>
+            </div>
         </div>
         <div class="card">
             <h3>Top klienti</h3>
